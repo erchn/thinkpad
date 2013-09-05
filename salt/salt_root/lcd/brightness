@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "z$1" == "z" ]; then
+  echo 11 > /sys/class/backlight/acpi_video0/brightness
+else
+  echo 8 > /sys/class/backlight/acpi_video0/brightness
+fi
+SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/bin/brightness b"
+SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/usr/bin/brightness"
