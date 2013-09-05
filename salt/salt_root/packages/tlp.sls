@@ -1,3 +1,6 @@
+include:
+  - packages.repos
+
 tlp:
   pkg.installed:
     - name: tlp

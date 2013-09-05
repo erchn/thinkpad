@@ -1,9 +1,12 @@
 #!/bin/bash
 
-if [ "z$1" == "z" ]; then
+PATH=$PATH:/usr/bin:/bin
+
+file='/sys/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:08/PNP0C09:00/ACPI0003:00/power_supply/AC/online'
+sleep .5
+current=$(cat $file)
+if [ "$current" == "1" ]; then
   echo 11 > /sys/class/backlight/acpi_video0/brightness
 else
   echo 8 > /sys/class/backlight/acpi_video0/brightness
 fi
-SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/bin/brightness b"
-SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/usr/bin/brightness"
